@@ -28,7 +28,7 @@ ifeq "$(UI_TYPE)" "qt"
 endif
 
 ifeq "$(UI_TYPE)" "qt4"
-  UILIBS = -lQtGui
+  UILIBS = -lQtGui -lQtCore
 endif
 
 ifeq "$(UI_TYPE)" "gtk"

@@ -140,19 +140,19 @@ bool BooksDB::clearDatabase() {
 
 shared_ptr<Book> BooksDB::loadBook(const std::string &fileName) {
 	if (!isInitialized()) {
-		return 0;
+		return nullptr;
 	}
 
 	myFindFileId->setFileName(fileName);
 	if (!myFindFileId->run()) {
-		return false;
+		return nullptr;
 	}
 	((DBIntValue&)*myLoadBook->parameter("@file_id").value()) = myFindFileId->fileId();
 	shared_ptr<DBDataReader> reader = myLoadBook->executeReader();
 
 	if (reader.isNull() || !reader->next() ||
 			reader->type(0) != DBValue::DBINT /* book_id */) {
-		return 0;
+		return nullptr;
 	}
 	const int bookId = reader->intValue(0);
 
